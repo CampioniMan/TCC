@@ -2,14 +2,16 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 3
+  serializedVersion: 6
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Water4Simple
   m_Shader: {fileID: 4800000, guid: 8aaff0751054e4a9cb4642d01eaf5be9, type: 3}
-  m_ShaderKeywords: []
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
   m_CustomRenderQueue: -1
+  stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -87,11 +89,11 @@ Material:
       data:
         first:
           name: _Shininess
-        second: 349.137939
+        second: 349.13794
       data:
         first:
           name: _FresnelScale
-        second: .389714301
+        second: 0.3897143
       data:
         first:
           name: _GerstnerIntensity
@@ -99,11 +101,11 @@ Material:
       data:
         first:
           name: _HeightDisplacement
-        second: 2.33703184
+        second: 2.3370318
       data:
         first:
           name: _NormalsDisplacement
-        second: 72.7272797
+        second: 72.72728
     m_Colors:
       data:
         first:
@@ -112,15 +114,15 @@ Material:
       data:
         first:
           name: _DistortParams
-        second: {r: 1.02857149, g: .201872215, b: 2.76662493, a: -.417142838}
+        second: {r: 1.0285715, g: 0.20187221, b: 2.766625, a: -0.41714284}
       data:
         first:
           name: _InvFadeParemeter
-        second: {r: .275081277, g: .0856210217, b: .0941423923, a: .480310023}
+        second: {r: 0.27508128, g: 0.08562102, b: 0.09414239, a: 0.48031002}
       data:
         first:
           name: _AnimationTiling
-        second: {r: .400000006, g: .390999973, b: .560000002, a: .699999988}
+        second: {r: 0.4, g: 0.39099997, b: 0.56, a: 0.7}
       data:
         first:
           name: _AnimationDirection
@@ -128,7 +130,7 @@ Material:
       data:
         first:
           name: _BumpTiling
-        second: {r: .0399999991, g: .0399999991, b: .0399999991, a: .0799999982}
+        second: {r: 0.04, g: 0.04, b: 0.04, a: 0.08}
       data:
         first:
           name: _BumpDirection
@@ -136,35 +138,35 @@ Material:
       data:
         first:
           name: _BaseColor
-        second: {r: .172755614, g: .224076003, b: .24626863, a: .505882382}
+        second: {r: 0.17275561, g: 0.224076, b: 0.24626863, a: 0.5058824}
       data:
         first:
           name: _ReflectionColor
-        second: {r: .47582978, g: .606486499, b: .664179087, a: .470588237}
+        second: {r: 0.47582978, g: 0.6064865, b: 0.6641791, a: 0.47058824}
       data:
         first:
           name: _SpecularColor
-        second: {r: .820895553, g: .805815935, b: .771886885, a: 1}
+        second: {r: 0.82089555, g: 0.80581594, b: 0.7718869, a: 1}
       data:
         first:
           name: _WorldLightDir
-        second: {r: .0139923692, g: -.173590809, b: -.984718621, a: 0}
+        second: {r: 0.013992369, g: -0.17359081, b: -0.9847186, a: 0}
       data:
         first:
           name: _Foam
-        second: {r: .327586204, g: .7471264, b: 0, a: 0}
+        second: {r: 0.3275862, g: 0.7471264, b: 0, a: 0}
       data:
         first:
           name: _GAmplitude
-        second: {r: .300000012, g: .200000003, b: .25, a: .25}
+        second: {r: 0.3, g: 0.2, b: 0.25, a: 0.25}
       data:
         first:
           name: _GFrequency
-        second: {r: .5, g: .25, b: .600000024, a: .245000005}
+        second: {r: 0.5, g: 0.25, b: 0.6, a: 0.245}
       data:
         first:
           name: _GSteepness
-        second: {r: 3.03013062, g: 1, b: 1, a: 1}
+        second: {r: 3.0301306, g: 1, b: 1, a: 1}
       data:
         first:
           name: _GSpeed
@@ -172,19 +174,19 @@ Material:
       data:
         first:
           name: _GDirectionAB
-        second: {r: .850000024, g: .300000012, b: .25, a: .25}
+        second: {r: 0.85, g: 0.3, b: 0.25, a: 0.25}
       data:
         first:
           name: _GDirectionCD
-        second: {r: -.300000012, g: -.899999976, b: .5, a: .5}
+        second: {r: -0.3, g: -0.9, b: 0.5, a: 0.5}
       data:
         first:
           name: _DepthColor
-        second: {r: .298117638, g: .366117179, b: .395522416, a: .345098048}
+        second: {r: 0.29811764, g: 0.36611718, b: 0.39552242, a: 0.34509805}
       data:
         first:
           name: _RefractionFog
-        second: {r: .868177772, g: .879717588, b: .888059676, a: 1}
+        second: {r: 0.8681778, g: 0.8797176, b: 0.8880597, a: 1}
 --- !u!1002 &2100001
 EditorExtensionImpl:
   serializedVersion: 6

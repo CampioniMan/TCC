@@ -142,7 +142,9 @@
      <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrIntent.cs" />
      <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrUIHelpers.cs" />
      <Compile Include="Assets\GoogleVR\Scripts\Video\GvrVideoPlayerTexture.cs" />
+     <Compile Include="Assets\Scripts\Caracteristicas.cs" />
      <Compile Include="Assets\Scripts\Controller.cs" />
+     <Compile Include="Assets\Scripts\RemoveAgua.cs" />
      <Compile Include="Assets\Scripts\ScriptMenu.cs" />
      <Compile Include="Assets\Scripts\SoundTrack.cs" />
      <Compile Include="Assets\Scripts\ambienteAquoso.cs" />
