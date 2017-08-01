@@ -6,6 +6,7 @@ public class CatchableObject : MonoBehaviour {
     private bool taComArma;
     private Transform balaAtual;
     private Transform[] balas;
+    public int velocidade;
     public Transform bala1;
     public Transform bala2;
     public Transform bala3;
@@ -17,6 +18,8 @@ public class CatchableObject : MonoBehaviour {
     public Transform bala9;
     public Transform bala10;
     public Transform target;
+    public Transform target2;
+    public int vidaObj = 100;
 
 
     
@@ -27,7 +30,7 @@ public class CatchableObject : MonoBehaviour {
             if(balas[i].transform.position != new Vector3(50,160,90))
             {
                 Vector3 userDirection = Vector3.forward;
-                balas[i].transform.Translate(userDirection * 4 * Time.deltaTime);
+                balas[i].transform.Translate(userDirection * velocidade * Time.deltaTime);
                 balas[i].transform.parent = null;
             }
         }
@@ -80,6 +83,22 @@ public class CatchableObject : MonoBehaviour {
     {
         return Input.GetKeyDown(KeyCode.Tab);
     }
+
+    bool acertouAlvo()
+    {
+        bool acertou = false;
+        for(int i = 0;i<10;i++)
+        {
+            if (Physics.Raycast(target2.transform.position, balas[i].transform.forward, 1))
+            {
+                balas[i].transform.position = new Vector3(50, 160, 90);
+                acertou = true;                
+            }
+                
+        }
+        return acertou;
+        
+    }
     void atirar()
     {
         balaAtual.GetComponent<Rigidbody>().isKinematic = true;
@@ -125,6 +144,7 @@ public class CatchableObject : MonoBehaviour {
         balas = new Transform[10];
         conectarBalasNoVetor();
         balaAtual = balas[0];
+        velocidade = 4;
     }
 
     void Update()
@@ -143,6 +163,20 @@ public class CatchableObject : MonoBehaviour {
             {
                 pegarArma();                
             }
+        }
+
+        if (acertouAlvo())
+        {
+            vidaObj -= 5;
+            if (vidaObj <= 20)
+            {
+                target2.gameObject.GetComponent<Renderer>().material.color = new Color(189, 0, 0);
+            }
+            if (vidaObj <= 0)
+            {
+                target2.transform.position = new Vector3(500, 160, 90);
+            }
+
         }
 
         if (apertouTab() && taComArma)
