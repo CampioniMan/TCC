@@ -89,10 +89,15 @@ public class CatchableObject : MonoBehaviour {
         bool acertou = false;
         for(int i = 0;i<10;i++)
         {
-            if (Physics.Raycast(target2.transform.position, balas[i].transform.forward, 1))
+            RaycastHit hit;
+            if (Physics.Raycast(balas[i].transform.position, balas[i].transform.forward,out hit,1))
             {
-                balas[i].transform.position = new Vector3(50, 160, 90);
-                acertou = true;                
+                if(hit.transform.position == target2.transform.position)
+                {
+                    balas[i].transform.position = new Vector3(50, 160, 90);
+                    acertou = true;
+                }
+                               
             }
                 
         }
