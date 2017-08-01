@@ -4,43 +4,76 @@ using System.Collections;
 public class collideScript : MonoBehaviour {
 
     // Use this for initialization
-    int i;
-    bool b;
+    const int TEMPO_MAXIMO_AR = 1000;
+    const int TEMPO_MAXIMO_COLISAO = 15;
+    int tempoAposColisao;
+    int tempoNoAr;
+    bool jaColidiu;
 	void Start () {
-        i = 0;
-        b = false;
+        tempoAposColisao = 0;
+        tempoNoAr = 0;
+        jaColidiu = false;
 	}
 
     // Update is called once per frame
     void Update()
     {
-        if(b)
+        if(jaColidiu)
         {
-            Debug.Log(i);
-            i++;
+            tempoAposColisao++;
         }
 
-        if(i==15)
+        if(atirandoEssaBala())
         {
-            this.GetComponent<Rigidbody>().isKinematic = true;
-            this.GetComponent<Rigidbody>().useGravity = false;
-            this.transform.position = new Vector3(50, 160,90);
-            i = 0;
-            b = false;
+            tempoNoAr++;
+            if(tempoNoAr >= TEMPO_MAXIMO_AR)
+            {
+                respawnarBala();               
+            }
+
+        }
+
+        if (tempoAposColisao >= TEMPO_MAXIMO_COLISAO)
+        {
+            respawnarBala();
         }
         
 
-        if (Physics.Raycast(transform.position, transform.forward, 1) && this.transform.position != new Vector3(50, 160, 90))
+        if (colidiu())
         {
-            this.gameObject.GetComponent<Renderer>().material.color = new Color(189, 0, 0);
-            this.GetComponent<Rigidbody>().isKinematic = false;
-            this.GetComponent<Rigidbody>().useGravity = true;
-            b = true;
+            //this.gameObject.GetComponent<Renderer>().material.color = new Color(189, 0, 0);
+            ativarPosColisao();
+            
         }
-        else
-        {
-            this.gameObject.GetComponent<Renderer>().material.color = new Color(255,255,255);
-        }
+        //else
+        //{
+        //    this.gameObject.GetComponent<Renderer>().material.color = new Color(255,255,255);
+        //}
     }
 
+    void respawnarBala()
+    {
+        this.GetComponent<Rigidbody>().isKinematic = true;
+        this.GetComponent<Rigidbody>().useGravity = false;
+        this.transform.position = new Vector3(50, 160, 90);
+        tempoAposColisao = 0;
+        jaColidiu = false;
+        tempoNoAr = 0;
+    }
+
+    bool atirandoEssaBala()
+    {
+        return this.transform.position != new Vector3(50, 160, 90);
+    }
+
+    bool colidiu()
+    {
+        return Physics.Raycast(transform.position, transform.forward, 1) && this.transform.position != new Vector3(50, 160, 90);
+    }
+    void ativarPosColisao()
+    {
+        this.GetComponent<Rigidbody>().isKinematic = false;
+        this.GetComponent<Rigidbody>().useGravity = true;
+        jaColidiu = true;
+    }
 }
