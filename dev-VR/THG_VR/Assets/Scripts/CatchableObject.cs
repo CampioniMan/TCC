@@ -84,6 +84,15 @@ public class CatchableObject : MonoBehaviour {
         return Input.GetKeyDown(KeyCode.Tab);
     }
 
+    void raioPadraoDasBalas(float raio)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            balas[i].transform.localScale = new Vector3(raio,raio,raio);
+            balas[i].gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
+        }
+    }
+
     bool acertouAlvo()
     {
         bool acertou = false;
@@ -149,7 +158,8 @@ public class CatchableObject : MonoBehaviour {
         balas = new Transform[10];
         conectarBalasNoVetor();
         balaAtual = balas[0];
-        velocidade = 4;
+        velocidade = 40;
+        raioPadraoDasBalas(0.25f);
     }
 
     void Update()
@@ -181,7 +191,6 @@ public class CatchableObject : MonoBehaviour {
             {
                 target2.transform.position = new Vector3(500, 160, 90);
             }
-
         }
 
         if (apertouTab() && taComArma)

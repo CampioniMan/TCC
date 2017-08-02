@@ -4,7 +4,7 @@ using System.Collections;
 public class collideScript : MonoBehaviour {
 
     // Use this for initialization
-    const int TEMPO_MAXIMO_AR = 1000;
+    const int TEMPO_MAXIMO_AR = 250;
     const int TEMPO_MAXIMO_COLISAO = 15;
     int tempoAposColisao;
     int tempoNoAr;
