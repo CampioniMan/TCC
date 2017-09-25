@@ -142,6 +142,8 @@
      <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrIntent.cs" />
      <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrUIHelpers.cs" />
      <Compile Include="Assets\GoogleVR\Scripts\Video\GvrVideoPlayerTexture.cs" />
+     <Compile Include="Assets\Scripts\Arma.cs" />
+     <Compile Include="Assets\Scripts\Bala.cs" />
      <Compile Include="Assets\Scripts\Caracteristicas.cs" />
      <Compile Include="Assets\Scripts\CatchableObject.cs" />
      <Compile Include="Assets\Scripts\Controller.cs" />
