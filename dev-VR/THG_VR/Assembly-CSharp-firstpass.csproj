@@ -248,7 +248,7 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="Google.ProtocolBuffers">
- <HintPath>F:/5oSemestreAtivo/__EU_FIZ/TCC/dev-VR/THG_VR/Assets/Plugins/Google.ProtocolBuffers.dll</HintPath>
+ <HintPath>C:/Temp/TCC/dev-VR/THG_VR/Assets/Plugins/Google.ProtocolBuffers.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
