@@ -1,72 +1,44 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CatchableObject : MonoBehaviour {
-
+public class CatchableObject : MonoBehaviour
+{
     private bool taComArma;
-    private Transform balaAtual;
-    private Transform[] balas;
-    public int velocidade;
-    public Transform bala1;
-    public Transform bala2;
-    public Transform bala3;
-    public Transform bala4;
-    public Transform bala5;
-    public Transform bala6;
-    public Transform bala7;
-    public Transform bala8;
-    public Transform bala9;
-    public Transform bala10;
+    private const int GRAVITY = 4;
+    private const int TEMPO_AR_MAX = 250;
+    private Bala balaAtual;
+    public Transform mira;
+    public Arma arm;
+    public Transform[] vetBalas = new Transform[40];
+    public Bala[] balas = new Bala[40];
     public Transform target;
     public Transform target2;
     public int vidaObj = 100;
 
-
-    
-    void moverBalasAtiradas()
+    void atualizarBalas()
     {
-        for(int i = 0;i<10;i++)
+        for (int i = 0; i < 40; i++)
         {
-            if(balas[i].transform.position != new Vector3(50,160,90))
+            Bala bala = arm.Municao[i];
+            bala.moverBala();
+            if (bala.JaColidiu)
             {
-                Vector3 userDirection = Vector3.forward;
-                balas[i].transform.Translate(userDirection * velocidade * Time.deltaTime);
-                balas[i].transform.parent = null;
+                bala.TempoAposColisao++;
+                if (bala.TempoAposColisao >= 1)
+                {
+                    bala.receberEstadoAposColisao();
+                }
+            }
+
+            if (bala.atirando())
+            {
+                bala.incTempoNoAr();
+                if (bala.TempoNoAr >= TEMPO_AR_MAX)
+                {
+                    bala.doRespawn();
+                }
             }
         }
-    }
-
-    void conectarBalasNoVetor()
-    {
-        balas[0] = bala1;
-        balas[1] = bala2;
-        balas[2] = bala3;
-        balas[3] = bala4;
-        balas[4] = bala5;
-        balas[5] = bala6;
-        balas[6] = bala7;
-        balas[7] = bala8;
-        balas[8] = bala9;
-        balas[9] = bala10;
-    }
-
-    void prepararBalaAtual()
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            if (balas[i].transform.position == new Vector3(50, 160, 90))
-            {
-                balaAtual = balas[i];
-            }
-        }
-
-        float val1 = GameObject.FindGameObjectWithTag("VrMain").transform.rotation.eulerAngles.y;
-        float val2 = GameObject.FindGameObjectWithTag("HeadTag").transform.rotation.eulerAngles.y - val1;
-        float val3 = val2 + val1;
-
-        float valX = GameObject.FindGameObjectWithTag("HeadTag").transform.rotation.eulerAngles.x;
-
-        balaAtual.transform.eulerAngles = new Vector3(valX, val3, balaAtual.transform.rotation.z);
     }
 
     bool apertouBotaoDeTiro()
@@ -76,7 +48,14 @@ public class CatchableObject : MonoBehaviour {
 
     bool podePegarArma()
     {
-        return Physics.Raycast(target.transform.position, GameObject.FindGameObjectWithTag("MainCamera").transform.forward, 1);
+        bool b = false;
+        RaycastHit hit;
+        if (Physics.Raycast(target.transform.position, GameObject.FindGameObjectWithTag("MainCamera").transform.forward, out hit, 1f))
+        {
+            if (hit.transform.position == GameObject.Find("Sphere").transform.position)
+                b = true;
+        }
+        return b;
     }
 
     bool apertouTab()
@@ -84,66 +63,69 @@ public class CatchableObject : MonoBehaviour {
         return Input.GetKeyDown(KeyCode.Tab);
     }
 
-    void raioPadraoDasBalas(float raio)
+    void verificarMira()
     {
-        for (int i = 0; i < 10; i++)
+        if (taComArma)
         {
-            balas[i].transform.localScale = new Vector3(raio,raio,raio);
-            balas[i].gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
+            mira.transform.parent = GameObject.FindGameObjectWithTag("MainCamera").transform;
+            mira.transform.localPosition = new Vector3(0.1f, -0.2f, 4f);
+        }
+        else
+        {
+            if (mira.transform.position != new Vector3(100, 100, 100))
+                mira.transform.position = new Vector3(100, 100, 100);
         }
     }
 
     bool acertouAlvo()
     {
-        bool acertou = false;
-        for(int i = 0;i<10;i++)
+        if (!taComArma)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(balas[i].transform.position, balas[i].transform.forward,out hit,1))
-            {
-                if(hit.transform.position == target2.transform.position)
-                {
-                    balas[i].transform.position = new Vector3(50, 160, 90);
-                    acertou = true;
-                }
-                               
-            }
-                
+            return false;
+        }
+
+        bool acertou = false;
+
+        for (int i = 0; i < 40; i++)
+        {
+            if (arm.Municao[i].acertouAlvo(target2))
+                acertou = true;
         }
         return acertou;
-        
     }
+
     void atirar()
     {
-        balaAtual.GetComponent<Rigidbody>().isKinematic = true;
-        balaAtual.GetComponent<Rigidbody>().useGravity = false;
-        balaAtual.transform.parent = GameObject.FindGameObjectWithTag("MainCamera").transform;
-        balaAtual.transform.localPosition = new Vector3(1.26f, -1.1f, 1.2f);   
+        balaAtual.BalaTransform.GetComponent<Rigidbody>().isKinematic = true;
+        balaAtual.BalaTransform.GetComponent<Rigidbody>().useGravity = false;
+        balaAtual.BalaTransform.transform.parent = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        balaAtual.BalaTransform.transform.localPosition = new Vector3(1.00f, -0.4f, 1.2f);
     }
 
     void pegarArma()
     {
         this.GetComponent<Rigidbody>().isKinematic = true;
         this.GetComponent<Rigidbody>().useGravity = false;
-
         this.transform.parent = GameObject.FindGameObjectWithTag("MainCamera").transform;
         this.transform.localPosition = new Vector3(1.26f, -1.1f, 1.2f);
+        GameObject.Find("Armas").transform.parent = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        this.transform.parent = GameObject.Find("Armas").transform;
         taComArma = true;
     }
 
     void soltarArma()
     {
-        this.transform.parent = GameObject.Find("VRMain").transform;
         this.transform.parent = null;
+        GameObject.Find("Armas").transform.parent = null;
+        this.transform.parent = GameObject.Find("Armas").transform;
         this.GetComponent<Rigidbody>().isKinematic = false;
         this.GetComponent<Rigidbody>().useGravity = true;
         taComArma = false;
     }
 
-    void aumentarGravidade()
+    void imporGravidade()
     {
         CharacterController controller = GetComponent<CharacterController>();
-
 
         Rigidbody body;
         body = gameObject.GetComponent<Rigidbody>();
@@ -155,41 +137,43 @@ public class CatchableObject : MonoBehaviour {
     void Start()
     {
         taComArma = false;
-        balas = new Transform[10];
-        conectarBalasNoVetor();
-        balaAtual = balas[0];
-        velocidade = 40;
-        raioPadraoDasBalas(0.25f);
+        arm = gameObject.AddComponent(typeof(Arma)) as Arma;
+        arm.createArma(this.transform, vetBalas, 0);
     }
 
     void Update()
     {
-        moverBalasAtiradas();
-                    
+        atualizarBalas();
+        verificarMira();
+        imporGravidade();
+        arm.verificarRecarga();
         if (taComArma && apertouBotaoDeTiro())
         {
-                prepararBalaAtual();
-                atirar();            
+            arm.atirar();
         }
         else
         if (apertouBotaoDeTiro())
         {
             if (podePegarArma())
             {
-                pegarArma();                
+                pegarArma();
             }
         }
 
         if (acertouAlvo())
         {
             vidaObj -= 5;
-            if (vidaObj <= 20)
-            {
-                target2.gameObject.GetComponent<Renderer>().material.color = new Color(189, 0, 0);
-            }
+            Renderer rend = target2.gameObject.GetComponent<Renderer>();
+
             if (vidaObj <= 0)
             {
                 target2.transform.position = new Vector3(500, 160, 90);
+            }
+            else
+            if (vidaObj <= 20)
+            {
+                if (rend.material.color != new Color(189, 0, 0))
+                    rend.material.color = new Color(189, 0, 0);
             }
         }
 
@@ -197,9 +181,5 @@ public class CatchableObject : MonoBehaviour {
         {
             soltarArma();
         }
-
-        aumentarGravidade();
     }
-
-    
 }

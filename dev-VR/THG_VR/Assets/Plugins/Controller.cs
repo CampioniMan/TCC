@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(CharacterController))]
-public class controller : MonoBehaviour
+public class Controller : MonoBehaviour
 {
     public float speed = 3.0F;
     private const float MAX_SPEED = 15.0F;
@@ -10,14 +10,14 @@ public class controller : MonoBehaviour
     public float rotateSpeed = 3.0F;
     private Vector3 moveDirection = Vector3.zero;
     public const float JUMP_SPEED = 15.0F;
-    public const float GRAVITY= 20.0F;
+    public const float GRAVITY = 20.0F;
     private Vector3 spawnPoint;
 
     bool apertouBotaoCorrer()
     {
         return Input.GetKeyDown(KeyCode.LeftShift);
     }
-    
+
     bool soltouBotaoCorrer()
     {
         return Input.GetKeyUp(KeyCode.LeftShift);
@@ -82,7 +82,7 @@ public class controller : MonoBehaviour
 
         adicionarGravidade();
 
-        moverPersonagem();    
+        moverPersonagem();
 
         if (transform.position.y < -50f)
         {

@@ -26,13 +26,14 @@ public class Arma : MonoBehaviour
         }
     }
 
-    public Arma(Transform transf, Transform[] balas, int qualArma)
+    public void createArma(Transform transf, Transform[] balas, int qualArma)
     {
         tipo = qualArma;
         armaTransform = transf;
         for (int i = 0; i < 40; i++)
         {
-            municao[i] = new Bala(balas[i]);
+            municao[i] = gameObject.AddComponent(typeof(Bala)) as Bala;
+            municao[i].createBala(balas[i]);
             municao[i].TempoNoAr = 0;
             municao[i].VetorGravidade = Vector3.zero;
             municao[i].TempoAposColisao = 0;
@@ -40,7 +41,7 @@ public class Arma : MonoBehaviour
             municao[i].JaColidiu = false;
         }
         qtBalas = 40;
-        recarregando = false;        
+        recarregando = false;
     }
     public Arma()
     {
@@ -51,7 +52,7 @@ public class Arma : MonoBehaviour
 
     void prepararBalaAtual()
     {
-        if(contBala < 40)
+        if (contBala < 40)
         {
             blAt = municao[contBala++];
             blAt.prepararParaAtirar();
@@ -59,20 +60,18 @@ public class Arma : MonoBehaviour
 
     }
 
-
     public void atirar()
     {
-        
-        if(!semBalas())
+        if (!semBalas())
         {
             prepararBalaAtual();
             blAt.BalaTransform.GetComponent<Rigidbody>().isKinematic = true;
             blAt.BalaTransform.GetComponent<Rigidbody>().useGravity = false;
             blAt.BalaTransform.transform.parent = GameObject.FindGameObjectWithTag("MainCamera").transform;
             blAt.BalaTransform.transform.localPosition = new Vector3(1.00f, -0.4f, 1.2f);
-            if(qtBalas>0)
+            if (qtBalas > 0)
                 qtBalas--;
-        }                    
+        }
     }
 
 
@@ -82,14 +81,12 @@ public class Arma : MonoBehaviour
         return qtBalas == 0;
     }
 
-
     public void verificarRecarga()
     {
-
-        if(recarregando)
+        if (recarregando)
         {
             tempoRecarga++;
-            if(tempoRecarga >= TEMPO_RECARGA)
+            if (tempoRecarga >= TEMPO_RECARGA)
             {
                 recarregar();
             }

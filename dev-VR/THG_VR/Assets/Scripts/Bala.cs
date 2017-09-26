@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bala : MonoBehaviour{
-
+public class Bala : MonoBehaviour
+{
     private Transform balaTransform;
     private bool jaColidiu;
     private int tempoNoAr;
@@ -107,10 +107,10 @@ public class Bala : MonoBehaviour{
         vetorGravidade.y -= valor;
     }
 
-    public Bala(Transform tReference)
+    public void createBala(Transform tReference)
     {
         BalaTransform = tReference;
-        BalaTransform.localScale = new Vector3(RAIO,RAIO,RAIO);
+        BalaTransform.localScale = new Vector3(RAIO, RAIO, RAIO);
         BalaTransform.gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
         JaColidiu = false;
         TempoNoAr = 0;
@@ -133,7 +133,7 @@ public class Bala : MonoBehaviour{
 
     public void moverBala()
     {
-        if (atirando()) 
+        if (atirando())
         {
             Vector3 userDirection = Vector3.forward;
             balaTransform.transform.Translate(userDirection * velocidade * Time.deltaTime);
@@ -149,10 +149,9 @@ public class Bala : MonoBehaviour{
     }
 
     public void incTempoNoAr()
-    {        
+    {
         tempoNoAr++;
     }
-
 
     public bool passouTempoLimiteNoAr()
     {
@@ -166,7 +165,7 @@ public class Bala : MonoBehaviour{
         this.balaTransform.GetComponent<Rigidbody>().useGravity = true;
     }
 
-    public  bool atirando()
+    public bool atirando()
     {
         return this.balaTransform.position != new Vector3(50, 160, 90);
     }
@@ -184,14 +183,14 @@ public class Bala : MonoBehaviour{
             this.balaTransform.transform.eulerAngles = new Vector3(valX, val3, this.balaTransform.transform.rotation.z);
             this.velocidade = 40;
         }
-            
+
     }
 
     public bool acertouAlvo(Transform target)
     {
         RaycastHit hit;
 
-        if  (
+        if (
             Physics.Raycast(this.balaTransform.transform.position, this.balaTransform.transform.forward, out hit, 2) && !this.jaColidiu
             && hit.transform.localScale != this.balaTransform.transform.localScale
             ||
@@ -207,8 +206,5 @@ public class Bala : MonoBehaviour{
                 return true;
         }
         return false;
-            
     }
-
-
 }
