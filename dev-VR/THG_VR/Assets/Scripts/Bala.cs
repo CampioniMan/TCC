@@ -110,8 +110,8 @@ public class Bala : MonoBehaviour
     public void createBala(Transform tReference)
     {
         BalaTransform = tReference;
-        BalaTransform.localScale = new Vector3(RAIO, RAIO, RAIO);
-        BalaTransform.gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
+	BalaTransform.localScale = new Vector3(RAIO,RAIO,RAIO);
+	BalaTransform.gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
         JaColidiu = false;
         TempoNoAr = 0;
         Velocidade = 40;
@@ -133,8 +133,7 @@ public class Bala : MonoBehaviour
 
     public void moverBala()
     {
-        if (atirando())
-        {
+        if (atirando()) {
             Vector3 userDirection = Vector3.forward;
             balaTransform.transform.Translate(userDirection * velocidade * Time.deltaTime);
             if (!jaColidiu)
@@ -149,7 +148,7 @@ public class Bala : MonoBehaviour
     }
 
     public void incTempoNoAr()
-    {
+    { 
         tempoNoAr++;
     }
 
@@ -165,7 +164,8 @@ public class Bala : MonoBehaviour
         this.balaTransform.GetComponent<Rigidbody>().useGravity = true;
     }
 
-    public bool atirando()
+
+    public  bool atirando()
     {
         return this.balaTransform.position != new Vector3(50, 160, 90);
     }
@@ -183,14 +183,13 @@ public class Bala : MonoBehaviour
             this.balaTransform.transform.eulerAngles = new Vector3(valX, val3, this.balaTransform.transform.rotation.z);
             this.velocidade = 40;
         }
-
     }
 
     public bool acertouAlvo(Transform target)
     {
         RaycastHit hit;
 
-        if (
+        if  (
             Physics.Raycast(this.balaTransform.transform.position, this.balaTransform.transform.forward, out hit, 2) && !this.jaColidiu
             && hit.transform.localScale != this.balaTransform.transform.localScale
             ||

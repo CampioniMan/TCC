@@ -16,8 +16,8 @@ public class CatchableObject : MonoBehaviour
     public int vidaObj = 100;
 
     void atualizarBalas()
-    {
-        for (int i = 0; i < 40; i++)
+    {        
+        for(int i = 0;i< 40;i++)
         {
             Bala bala = arm.Municao[i];
             bala.moverBala();
@@ -65,7 +65,8 @@ public class CatchableObject : MonoBehaviour
 
     void verificarMira()
     {
-        if (taComArma)
+
+        if(taComArma && !mira.transform.parent == GameObject.FindGameObjectWithTag("MainCamera").transform)
         {
             mira.transform.parent = GameObject.FindGameObjectWithTag("MainCamera").transform;
             mira.transform.localPosition = new Vector3(0.1f, -0.2f, 4f);
@@ -99,7 +100,7 @@ public class CatchableObject : MonoBehaviour
         balaAtual.BalaTransform.GetComponent<Rigidbody>().isKinematic = true;
         balaAtual.BalaTransform.GetComponent<Rigidbody>().useGravity = false;
         balaAtual.BalaTransform.transform.parent = GameObject.FindGameObjectWithTag("MainCamera").transform;
-        balaAtual.BalaTransform.transform.localPosition = new Vector3(1.00f, -0.4f, 1.2f);
+        balaAtual.BalaTransform.transform.localPosition = new Vector3(1.00f, -0.4f, 1.2f);        
     }
 
     void pegarArma()
@@ -114,7 +115,7 @@ public class CatchableObject : MonoBehaviour
     }
 
     void soltarArma()
-    {
+    {        
         this.transform.parent = null;
         GameObject.Find("Armas").transform.parent = null;
         this.transform.parent = GameObject.Find("Armas").transform;
@@ -138,7 +139,7 @@ public class CatchableObject : MonoBehaviour
     {
         taComArma = false;
         arm = gameObject.AddComponent(typeof(Arma)) as Arma;
-        arm.createArma(this.transform, vetBalas, 0);
+        arm.createArma(this.transform,vetBalas,0);
     }
 
     void Update()
@@ -146,7 +147,7 @@ public class CatchableObject : MonoBehaviour
         atualizarBalas();
         verificarMira();
         imporGravidade();
-        arm.verificarRecarga();
+        arm.verificarRecarga();        
         if (taComArma && apertouBotaoDeTiro())
         {
             arm.atirar();
