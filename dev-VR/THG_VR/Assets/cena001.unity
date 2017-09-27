@@ -5554,7 +5554,6 @@ GameObject:
   - 23: {fileID: 2022290288}
   - 143: {fileID: 2022290287}
   - 54: {fileID: 2022290286}
-  - 114: {fileID: 2022290285}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -5562,19 +5561,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2022290285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2022290284}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33cc14b913d1e4b4791ce377bd5811f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  i: 0
-  moveDirection: {x: 0, y: 0, z: 0}
 --- !u!54 &2022290286
 Rigidbody:
   m_ObjectHideFlags: 0
