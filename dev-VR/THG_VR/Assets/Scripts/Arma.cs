@@ -7,6 +7,7 @@ public class Arma : MonoBehaviour
     private Transform armaTransform;
     private Bala[] municao = new Bala[40];
     Bala blAt;
+    int delay = 0;
     private int qtBalas;
     private bool recarregando;
     private int tempoRecarga = 0;
@@ -41,7 +42,7 @@ public class Arma : MonoBehaviour
             municao[i].JaColidiu = false;
         }
         qtBalas = 40;
-        recarregando = false;        
+        recarregando = false;
     }
     public Arma()
     {
@@ -52,26 +53,26 @@ public class Arma : MonoBehaviour
 
     void prepararBalaAtual()
     {
+        if (contBala > 39)
+            contBala = 0;
 
-        if(contBala < 40)
-        {
-            blAt = municao[contBala++];
-            blAt.prepararParaAtirar();
-        }
-
+        blAt = municao[contBala++];
+        blAt.prepararParaAtirar();
+        
     }
 
     public void atirar()
-    {  
-        if(!semBalas())
+    {        
+        if(!semBalas() && !recarregando)
         {
             prepararBalaAtual();
             blAt.BalaTransform.GetComponent<Rigidbody>().isKinematic = true;
             blAt.BalaTransform.GetComponent<Rigidbody>().useGravity = false;
             blAt.BalaTransform.transform.parent = GameObject.FindGameObjectWithTag("MainCamera").transform;
-            blAt.BalaTransform.transform.localPosition = new Vector3(1.00f, -0.4f, 1.2f);
+            blAt.BalaTransform.transform.localPosition = new Vector3(1.00f, -0.4f, 1.5f);
             if(qtBalas>0)
                 qtBalas--;
+            delay = 0;
         }                    
     }
 
@@ -84,22 +85,33 @@ public class Arma : MonoBehaviour
 
     public void verificarRecarga()
     {
+        if (delay < 10)
+            delay++;
+                
         if(recarregando)
         {
             tempoRecarga++;
             if(tempoRecarga >= TEMPO_RECARGA)
             {
-                recarregar();
+                recarregarOK();
             }
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && qtBalas != 40)
         {
-            contBala = 0;
             recarregando = true;
         }
     }
-
-    public void recarregar()
+    
+    public void setDelay(int nDelay)
+    {
+        delay = nDelay;
+    }
+        
+    public bool podeAtirar()
+    {
+        return delay >= 10;       
+    }
+    public void recarregarOK()
     {
         recarregando = false;
         tempoRecarga = 0;

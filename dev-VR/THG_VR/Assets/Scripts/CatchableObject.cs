@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class CatchableObject : MonoBehaviour
 {
     private bool taComArma;
     private const int GRAVITY = 4;
     private const int TEMPO_AR_MAX = 250;
+    private bool apertandoBotaoMouse = false;
+    private bool apertandoBotaoRecarga = false;
     private Bala balaAtual;
     public Transform mira;
     public Arma arm;
@@ -42,20 +45,24 @@ public class CatchableObject : MonoBehaviour
     }
 
     bool apertouBotaoDeTiro()
-    {
+    {        
         return Input.GetMouseButtonDown(0);
+    }
+
+    bool soltouBotaoDeTiro()
+    {
+        return Input.GetMouseButtonUp(0);
     }
 
     bool podePegarArma()
     {
-        bool b = false;
         RaycastHit hit;
-        if (Physics.Raycast(target.transform.position, GameObject.FindGameObjectWithTag("MainCamera").transform.forward, out hit, 1f))
+        if(Physics.Raycast(target.transform.position, GameObject.FindGameObjectWithTag("MainCamera").transform.forward,out hit, 1))
         {
             if (hit.transform.position == GameObject.Find("Sphere").transform.position)
-                b = true;
+                return true ;
         }
-        return b;
+        return false;
     }
 
     bool apertouTab()
@@ -65,8 +72,7 @@ public class CatchableObject : MonoBehaviour
 
     void verificarMira()
     {
-
-        if(taComArma && !mira.transform.parent == GameObject.FindGameObjectWithTag("MainCamera").transform)
+        if(taComArma)
         {
             mira.transform.parent = GameObject.FindGameObjectWithTag("MainCamera").transform;
             mira.transform.localPosition = new Vector3(0.1f, -0.2f, 4f);
@@ -100,7 +106,6 @@ public class CatchableObject : MonoBehaviour
         balaAtual.BalaTransform.GetComponent<Rigidbody>().isKinematic = true;
         balaAtual.BalaTransform.GetComponent<Rigidbody>().useGravity = false;
         balaAtual.BalaTransform.transform.parent = GameObject.FindGameObjectWithTag("MainCamera").transform;
-        balaAtual.BalaTransform.transform.localPosition = new Vector3(1.00f, -0.4f, 1.2f);        
     }
 
     void pegarArma()
@@ -112,6 +117,7 @@ public class CatchableObject : MonoBehaviour
         GameObject.Find("Armas").transform.parent = GameObject.FindGameObjectWithTag("MainCamera").transform;
         this.transform.parent = GameObject.Find("Armas").transform;
         taComArma = true;
+        arm.setDelay(-10);
     }
 
     void soltarArma()
@@ -123,7 +129,10 @@ public class CatchableObject : MonoBehaviour
         this.GetComponent<Rigidbody>().useGravity = true;
         taComArma = false;
     }
-
+    private bool segurandoBotaoDeTiro()
+    {
+        return apertandoBotaoMouse;
+    }
     void imporGravidade()
     {
         CharacterController controller = GetComponent<CharacterController>();
@@ -148,18 +157,28 @@ public class CatchableObject : MonoBehaviour
         verificarMira();
         imporGravidade();
         arm.verificarRecarga();        
-        if (taComArma && apertouBotaoDeTiro())
+        if(apertouBotaoDeTiro())
         {
-            arm.atirar();
-        }
-        else
-        if (apertouBotaoDeTiro())
-        {
-            if (podePegarArma())
+            apertandoBotaoMouse = true;
+            if (taComArma)
             {
-                pegarArma();
+                if (arm.podeAtirar())
+                    arm.atirar();
             }
+            else
+                if (podePegarArma())
+                    pegarArma();
         }
+        else if (taComArma && segurandoBotaoDeTiro())
+        {
+            if (arm.podeAtirar())
+                arm.atirar();
+        }
+
+        if (soltouBotaoDeTiro())
+        {
+            apertandoBotaoMouse = false;
+        }        
 
         if (acertouAlvo())
         {
