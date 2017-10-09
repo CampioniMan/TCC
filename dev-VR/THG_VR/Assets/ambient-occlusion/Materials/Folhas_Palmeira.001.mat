@@ -147,7 +147,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0.017018612, g: 0.42922556, b: 0.0066828346, a: 1}
+        second: {r: 0.02637105, g: 0.5735294, b: 0.012651396, a: 1}
       data:
         first:
           name: _TreeInstanceColor
