@@ -112,6 +112,7 @@ public class CatchableObject : MonoBehaviour
     {
         this.GetComponent<Rigidbody>().isKinematic = true;
         this.GetComponent<Rigidbody>().useGravity = false;
+        this.GetComponent<SphereCollider>().enabled = false;
         this.transform.parent = GameObject.FindGameObjectWithTag("MainCamera").transform;
         this.transform.localPosition = new Vector3(1.26f, -1.1f, 1.2f);
         GameObject.Find("Armas").transform.parent = GameObject.FindGameObjectWithTag("MainCamera").transform;
@@ -148,6 +149,12 @@ public class CatchableObject : MonoBehaviour
     {
         taComArma = false;
         arm = gameObject.AddComponent(typeof(Arma)) as Arma;
+        int cont = 0;
+        foreach(Transform child in GameObject.Find("Municao").transform)
+        {
+            vetBalas[cont] = child;
+            cont++;
+        }
         arm.createArma(this.transform,vetBalas,0);
     }
 
