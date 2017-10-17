@@ -1,0 +1,178 @@
+fileFormatVersion: 2
+guid: 365a2079aa3b92849b49c851a1306677
+timeCreated: 1506374464
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Armature
+    100004: Bone
+    100006: Bone.001
+    100008: Bone.002
+    100010: Bone.002_end
+    100012: Bone.003
+    100014: Bone.004
+    100016: Bone.004_end
+    100018: Bone.006
+    100020: Bone.007
+    100022: Bone.009
+    100024: Bone.009_end
+    100026: Bone.012
+    100028: Bone.012_end
+    100030: Braco_Dir
+    100032: Braco_Esq
+    100034: Cabeca
+    100036: Camera
+    100038: foo
+    100040: foo.001
+    100042: foo.002
+    100044: foo.002_end
+    100046: Mao_Dir
+    100048: Mao_Esq
+    100050: Matrix
+    100052: Pernas
+    100054: Pernas.001
+    100056: Pernas.002
+    100058: Pernas.003
+    100060: Pes
+    100062: Pes.001
+    100064: Sun
+    100066: Torso
+    400000: //RootNode
+    400002: Armature
+    400004: Bone
+    400006: Bone.001
+    400008: Bone.002
+    400010: Bone.002_end
+    400012: Bone.003
+    400014: Bone.004
+    400016: Bone.004_end
+    400018: Bone.006
+    400020: Bone.007
+    400022: Bone.009
+    400024: Bone.009_end
+    400026: Bone.012
+    400028: Bone.012_end
+    400030: Braco_Dir
+    400032: Braco_Esq
+    400034: Cabeca
+    400036: Camera
+    400038: foo
+    400040: foo.001
+    400042: foo.002
+    400044: foo.002_end
+    400046: Mao_Dir
+    400048: Mao_Esq
+    400050: Matrix
+    400052: Pernas
+    400054: Pernas.001
+    400056: Pernas.002
+    400058: Pernas.003
+    400060: Pes
+    400062: Pes.001
+    400064: Sun
+    400066: Torso
+    2300000: Braco_Dir
+    2300002: Braco_Esq
+    2300004: Cabeca
+    2300006: Mao_Dir
+    2300008: Mao_Esq
+    2300010: Matrix
+    2300012: Pernas
+    2300014: Pernas.001
+    2300016: Pernas.002
+    2300018: Pernas.003
+    2300020: Pes
+    2300022: Pes.001
+    2300024: Torso
+    3300000: Braco_Dir
+    3300002: Braco_Esq
+    3300004: Cabeca
+    3300006: Mao_Dir
+    3300008: Mao_Esq
+    3300010: Matrix
+    3300012: Pernas
+    3300014: Pernas.001
+    3300016: Pernas.002
+    3300018: Pernas.003
+    3300020: Pes
+    3300022: Pes.001
+    3300024: Torso
+    4300000: Matrix
+    4300002: Braco_Dir
+    4300004: Mao_Dir
+    4300006: Braco_Esq
+    4300008: Mao_Esq
+    4300010: Cabeca
+    4300012: Pernas
+    4300014: Pernas.002
+    4300016: Pes
+    4300018: Pernas.001
+    4300020: Pernas.003
+    4300022: Pes.001
+    4300024: Torso
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
