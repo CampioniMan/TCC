@@ -169,12 +169,19 @@
     <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrIntent.cs" />
     <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrUIHelpers.cs" />
     <Compile Include="Assets\GoogleVR\Scripts\Video\GvrVideoPlayerTexture.cs" />
+    <Compile Include="Assets\Scripts\AdicionaNoClique.cs" />
+    <Compile Include="Assets\Scripts\Arma.cs" />
+    <Compile Include="Assets\Scripts\Bala.cs" />
     <Compile Include="Assets\Scripts\Caracteristicas.cs" />
-    <Compile Include="Assets\Scripts\Controller.cs" />
+    <Compile Include="Assets\Scripts\CatchableObject.cs" />
     <Compile Include="Assets\Scripts\RemoveAgua.cs" />
     <Compile Include="Assets\Scripts\ScriptMenu.cs" />
+    <Compile Include="Assets\Scripts\SegueObjeto.cs" />
+    <Compile Include="Assets\Scripts\SocketMandaObjetos.cs" />
     <Compile Include="Assets\Scripts\SoundTrack.cs" />
     <Compile Include="Assets\Scripts\ambienteAquoso.cs" />
+    <Compile Include="Assets\Scripts\barraElixir.cs" />
+    <Compile Include="Assets\Scripts\controller.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GoogleVR\Demos\Environment\DemoEnvUnlitGrayscale.shader" />

@@ -29,7 +29,7 @@ public class SegueObjeto : MonoBehaviour {
             distanciaAtual++;
             Debug.Log(distanciaAtual);
         }
-        this.transform.position = new Vector3(alvo.transform.position.x, this.transform.position.y, alvo.transform.position.z);
+        this.transform.position = new Vector3(alvo.transform.position.x, alvo.transform.position.y+ distanciaAtual, alvo.transform.position.z);
         Camera.main.orthographicSize = distanciaAtual;
 
     }

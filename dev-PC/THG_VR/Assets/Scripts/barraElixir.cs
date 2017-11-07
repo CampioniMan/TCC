@@ -40,19 +40,21 @@ public class barraElixir : MonoBehaviour {
         }
 	}
 
-    void alteraMultiplicador(float novoMultiplicador)
+    public void alteraMultiplicador(float novoMultiplicador)
     {
         multiplicador = novoMultiplicador;
         taxaParaCrescerUmDeElixir = (segundosParaCrescer / taxaCrescimento) / multiplicador;
     }
 
     // retorna se gastou ou não o elixir pedido
-    bool gastarElixir(int quanto)
+    public bool gastarElixir(int quanto)
     {
         if (quanto > quantoElixirTem)
             return false;
 
         quantoElixirTem -= quanto;
+        if (ehPraDarOutput)
+            output.text = quantoElixirTem.ToString();
         return true;
     }
 }
